@@ -1,0 +1,12 @@
+import cv2 as bandw
+img=bandw.imread("photo.jpg")
+gray=bandw.cvtColor(img, bandw.COLOR_BGR2GRAY)
+gray=bandw.medianBlur(gray, 5)
+edges=bandw.adaptiveThreshold(gray, 255, bandw.ADAPTIVE_THRESH_MEAN_C, bandw.THRESH_BINARY, 9, 9)
+color=bandw.bilateralFilter(img, 9, 250, 250)
+cartoon=bandw.bitwise_and(color, color, mask=edges)
+bandw.imshow("Image", img)
+bandw.imshow("edges", edges)
+bandw.imshow("cartoon", cartoon)
+bandw.waitKey(0)
+bandw.destroyAllWindows()
